@@ -5,7 +5,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EmbedSocial Internship - Filip Manev</title>
+    <title>EmbedSocial - Filip Manev</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
 </head>
 
 <body>
@@ -62,6 +80,48 @@
         <button>Filter</button>
 
     </form>
+
+    <!-- table -->
+    <table>
+
+        <!-- table header -->
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Rating</th>
+                <th>Date</th>
+                <th>Review Text</th>
+            </tr>
+        </thead>
+
+        <!-- table body -->
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Rating 1</td>
+                <td>Date 1</td>
+                <td>Review Text 1</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Rating 2</td>
+                <td>Date 2</td>
+                <td>Review Text 2</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Rating 3</td>
+                <td>Date 3</td>
+                <td>Review Text 3</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Rating 4</td>
+                <td>Date 4</td>
+                <td>Review Text 4</td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 
 </html>
