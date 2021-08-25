@@ -31,7 +31,7 @@
     <h3>Filter reviews</h3>
 
     <!-- form -->
-    <form action="" type="POST">
+    <form action="logic.php" method="POST">
 
         <!-- rating highest/lowest -->
         <div>
@@ -77,7 +77,7 @@
         </div>
 
         <!-- submit button -->
-        <button>Filter</button>
+        <button type="submit">Filter</button>
 
     </form>
 
