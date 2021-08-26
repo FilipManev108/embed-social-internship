@@ -30,7 +30,6 @@ if (isset($_SESSION['json'])) {
     //receiveing the fully sorted json data array from logic.php file
     $new_json_data = $_SESSION['json'];
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -40,128 +39,119 @@ if (isset($_SESSION['json'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <title>EmbedSocial - Filip Manev</title>
-    <style>
-        table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        td,
-        th {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-
-        tr:nth-child(even) {
-            background-color: #dddddd;
-        }
-    </style>
 </head>
 
 <body>
-    <!-- title -->
-    <h3>Filter reviews</h3>
+    <section class="sec1">
+        <!-- title -->
+        <h1 class="font">Filter reviews</h1>
 
-    <!-- form -->
-    <form action="logic.php" method="POST">
+        <!-- form -->
+        <form class="font" action="logic.php" method="POST">
 
-        <!-- rating highest/lowest -->
-        <div>
-            <label for="rating">Order by rating:</label>
-            <select name="rating" id="rating">
+            <!-- rating highest/lowest -->
+            <div>
+                <label for="rating">Order by rating:</label>
+                <select name="rating" id="rating">
 
-                <!-- loop for rating dropdown options construction -->
-                <?php foreach ($binary_choice as $choice) { ?>
+                    <!-- loop for rating dropdown options construction -->
+                    <?php foreach ($binary_choice as $choice) { ?>
 
-                    <option value="<?= $choice ?>" <?php if ($choice == $rating) { ?> selected <?php } ?>><?= ($choice) ? "Highest first" : "Lowest First" ?></option>
+                        <option value="<?= $choice ?>" <?php if ($choice == $rating) { ?> selected <?php } ?>><?= ($choice) ? "Highest first" : "Lowest First" ?></option>
 
-                <?php } ?>
+                    <?php } ?>
 
-            </select>
-        </div>
+                </select>
+            </div>
 
-        <!-- minimum rating filter -->
-        <div>
-            <label for="rating-filter">Minimum rating:</label>
-            <select name="rating-filter" id="rating-filter">
+            <!-- minimum rating filter -->
+            <div>
+                <label for="rating-filter">Minimum rating:</label>
+                <select name="rating-filter" id="rating-filter">
 
-                <!-- loop for rating-filter dropdown options construction -->
-                <?php foreach ($rating_choice as $choice) { ?>
+                    <!-- loop for rating-filter dropdown options construction -->
+                    <?php foreach ($rating_choice as $choice) { ?>
 
-                    <option value="<?= $choice ?>" <?php if ($choice == $rating_filter) { ?> selected <?php } ?>><?= $choice ?></option>
+                        <option value="<?= $choice ?>" <?php if ($choice == $rating_filter) { ?> selected <?php } ?>><?= $choice ?></option>
 
-                <?php } ?>
+                    <?php } ?>
 
-            </select>
-        </div>
+                </select>
+            </div>
 
-        <!-- date newest/oldest -->
-        <div>
-            <label for="date">Order by date:</label>
-            <select name="date" id="date">
+            <!-- date newest/oldest -->
+            <div>
+                <label for="date">Order by date:</label>
+                <select name="date" id="date">
 
-                <!-- loop for date dropdown options construction -->
-                <?php foreach ($binary_choice as $choice) { ?>
+                    <!-- loop for date dropdown options construction -->
+                    <?php foreach ($binary_choice as $choice) { ?>
 
-                    <option value="<?= $choice ?>" <?php if ($choice == $date) { ?> selected <?php } ?>><?= ($choice) ? "Newest first" : "Oldest First" ?></option>
+                        <option value="<?= $choice ?>" <?php if ($choice == $date) { ?> selected <?php } ?>><?= ($choice) ? "Newest first" : "Oldest First" ?></option>
 
-                <?php } ?>
+                    <?php } ?>
 
-            </select>
-        </div>
+                </select>
+            </div>
 
-        <!-- text prioritisation -->
-        <div>
-            <label for="text">Prioritize by text:</label>
-            <select name="text" id="text">
+            <!-- text prioritisation -->
+            <div>
+                <label for="text">Prioritize by text:</label>
+                <select name="text" id="text">
 
-                <!-- loop for text dropdown options construction -->
-                <?php foreach ($binary_choice as $choice) { ?>
+                    <!-- loop for text dropdown options construction -->
+                    <?php foreach ($binary_choice as $choice) { ?>
 
-                    <option value="<?= $choice ?>" <?php if ($choice == $text) { ?> selected <?php } ?>><?= ($choice) ? "Yes" : "No" ?></option>
+                        <option value="<?= $choice ?>" <?php if ($choice == $text) { ?> selected <?php } ?>><?= ($choice) ? "Yes" : "No" ?></option>
 
-                <?php } ?>
+                    <?php } ?>
 
-            </select>
-        </div>
+                </select>
+            </div>
 
-        <!-- submit button -->
-        <button type="submit">Filter</button>
+            <!-- submit button -->
+            <button type="submit">Filter</button>
 
-    </form>
+        </form>
+    </section>
+    <section class="sec2">
+        <!-- table -->
+        <table class="font">
 
-    <!-- table -->
-    <table>
-
-        <!-- table header -->
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Rating</th>
-                <th>Date</th>
-                <th>Review Text</th>
-            </tr>
-        </thead>
-
-        <!-- table body -->
-        <tbody>
-
-            <!-- looping through the fully sorted new json data array -->
-            <?php foreach ($new_json_data as $value) { ?>
-
+            <!-- table header -->
+            <thead>
                 <tr>
-                    <td><?= $value['id'] ?></td>
-                    <td><?= $value['rating'] ?></td>
-                    <td><?= $value['reviewCreatedOnDate'] ?></td>
-                    <td><?= ($value['reviewText'] == '') ? 'no text' : $value['reviewText'] ?></td>
+                    <th>#</th>
+                    <th>Rating</th>
+                    <th>Date</th>
+                    <th>Review Text</th>
                 </tr>
+            </thead>
 
-            <?php } ?>
-        </tbody>
-    </table>
+            <!-- table body -->
+            <tbody>
+                <?php if (count($new_json_data) == 0) { ?>
+                    <tr>
+                        <td class='first_time' colspan='4'><b>Please configure your filter settings and click on 'Filter' button</b>
+                        <td>
+                    </tr>
+                <?php } ?>
+                <!-- looping through the fully sorted new json data array -->
+                <?php foreach ($new_json_data as $value) { ?>
+
+                    <tr>
+                        <td><?= $value['id'] ?></td>
+                        <td><?= $value['rating'] ?></td>
+                        <td><?= $value['reviewCreatedOnDate'] ?></td>
+                        <td><?= ($value['reviewText'] == '') ? 'no text' : $value['reviewText'] ?></td>
+                    </tr>
+
+                <?php } ?>
+            </tbody>
+        </table>
+    </section>
 </body>
 
 </html>
