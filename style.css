@@ -1,0 +1,81 @@
+body,
+h1 {
+  background-color: #828282;
+}
+
+body {
+  height: 100vh;
+}
+
+.font {
+  font-family: arial, sans-serif;
+  background-color: white;
+}
+
+.first_time {
+  text-align: center;
+}
+
+h1 {
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 10px 8px white;
+}
+
+.sec1,
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sec1 {
+  margin: 2rem 0 2rem 0;
+}
+
+.sec2 {
+  padding: 0 10rem 0 10rem;
+}
+
+form {
+  margin-top: 2rem;
+  min-width: 17rem;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+select {
+  width: 10rem;
+  padding: 5px 0;
+}
+
+label {
+  display: block;
+  margin: 10px 0 0 0;
+}
+
+button {
+  margin: 10px 0 10px 0;
+  padding: 5px 20px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+tr:nth-child(odd) {
+  background-color: white;
+}
