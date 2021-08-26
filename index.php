@@ -1,3 +1,29 @@
+<?php
+session_start();
+
+$rating = 0;
+$rating_filter = 1;
+$date = 0;
+$text = 0;
+
+$binary_choice = [1, 0];
+$rating_choice = [1, 2, 3, 4, 5];
+
+$new_json_data = [];
+
+if (isset($_SESSION['json'])) {
+    // echo 'SESSION IS OK';
+    $rating = $_SESSION['rating'];
+    $rating_filter = $_SESSION['rating-filter'];
+    $date = $_SESSION['date'];
+    $text = $_SESSION['text'];
+
+    $new_json_data = $_SESSION['json'];
+}
+$c = 0;
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,9 +63,13 @@
         <div>
             <label for="rating">Order by rating:</label>
             <select name="rating" id="rating">
-                <option selected disabled>Please choose an option</option>
-                <option value="1">Highest first</option>
-                <option value="0">Lowest first</option>
+
+                <?php foreach ($binary_choice as $choice) { ?>
+
+                    <option value="<?= $choice ?>" <?php if ($choice == $rating) { ?> selected <?php } ?>><?= ($choice) ? "Highest first" : "Lowest First" ?></option>
+
+                <?php } ?>
+
             </select>
         </div>
 
@@ -47,12 +77,13 @@
         <div>
             <label for="rating-filter">Minimum rating:</label>
             <select name="rating-filter" id="rating-filter">
-                <option selected disabled>Please choose an option</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
+
+                <?php foreach ($rating_choice as $choice) { ?>
+
+                    <option value="<?= $choice ?>" <?php if ($choice == $rating_filter) { ?> selected <?php } ?>><?= $choice ?></option>
+
+                <?php } ?>
+
             </select>
         </div>
 
@@ -60,9 +91,13 @@
         <div>
             <label for="date">Order by date:</label>
             <select name="date" id="date">
-                <option selected disabled>Please choose an option</option>
-                <option value="1">Newest</option>
-                <option value="0">Oldest</option>
+
+                <?php foreach ($binary_choice as $choice) { ?>
+
+                    <option value="<?= $choice ?>" <?php if ($choice == $date) { ?> selected <?php } ?>><?= ($choice) ? "Newest first" : "Oldest First" ?></option>
+
+                <?php } ?>
+
             </select>
         </div>
 
@@ -70,9 +105,13 @@
         <div>
             <label for="text">Prioritize by text:</label>
             <select name="text" id="text">
-                <option selected disabled>Please choose an option</option>
-                <option value="1">Yes</option>
-                <option value="0">No</option>
+
+                <?php foreach ($binary_choice as $choice) { ?>
+
+                    <option value="<?= $choice ?>" <?php if ($choice == $text) { ?> selected <?php } ?>><?= ($choice) ? "Yes" : "No" ?></option>
+
+                <?php } ?>
+
             </select>
         </div>
 
@@ -96,30 +135,14 @@
 
         <!-- table body -->
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>Rating 1</td>
-                <td>Date 1</td>
-                <td>Review Text 1</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Rating 2</td>
-                <td>Date 2</td>
-                <td>Review Text 2</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Rating 3</td>
-                <td>Date 3</td>
-                <td>Review Text 3</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>Rating 4</td>
-                <td>Date 4</td>
-                <td>Review Text 4</td>
-            </tr>
+            <?php foreach ($new_json_data as $value) { ?>
+                <tr>
+                    <td><?= $value['id'] ?></td>
+                    <td><?= $value['rating'] ?></td>
+                    <td><?= $value['reviewCreatedOnDate'] ?></td>
+                    <td><?= ($value['reviewText'] == '') ? 'no text' : $value['reviewText'] ?></td>
+                </tr>
+            <?php } ?>
         </tbody>
     </table>
 </body>
